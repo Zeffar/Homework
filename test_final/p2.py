@@ -5,6 +5,7 @@ with open ("input.txt") as read:
     S = []
     for line in read:
         S.append(line.split())
+        
     S = sorted(S, key = lambda x : x[1])
     cnt = 0
     lastShow = 0
