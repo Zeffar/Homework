@@ -1,15 +1,15 @@
 # Homework
-├── CSES
-│  ...
-├── LFA
-│   ├── build
-│   ├── input.txt
-│   ├── Makefile
-│   ├── output.txt
-│   ├── task1.cpp
-│   ├── task2.cpp
-│   └── task3.cpp
-├── README.md
-├── test_final
-│   ...
-└── test_lab_var1
+├── CSES <br>
+│  ...<br>
+├── LFA<br>
+│   ├── build<br>
+│   ├── input.txt<br>
+│   ├── Makefile<br>
+│   ├── output.txt<br>
+│   ├── task1.cpp<br>
+│   ├── task2.cpp<br>
+│   └── task3.cpp<br>
+├── README.md<br>
+├── test_final<br>
+│   ...<br>
+└── test_lab_var1<br>
