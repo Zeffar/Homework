@@ -37,15 +37,6 @@ string find(const string &cuv)
                 if (dist[it.first] == N && isEnd[it.first])
                     return "DA\n";
             }
-            if (it.second == '_')
-            {
-
-                if (dist[it.first] >= dist[aux])
-                    continue;
-
-                qe.push(it.first);
-                dist[it.first] = dist[aux];
-            }
         }
     }
     return "NU\n";
