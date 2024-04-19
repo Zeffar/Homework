@@ -1,21 +1,25 @@
 #include <stdio.h>
 #define MAX_SIZE 25000
 #define size a[0]
-struct heap
+typedef struct
 {
     int a[MAX_SIZE];
-} myHeap;
+} heap;
+// 2*i
+// 2<<1
 
+//2*i+1
+//2<<1|1
+// 2*i+2
+// 2<<1 + 2
 void swap(int *x, int *y)
 {
-    int temp = *x;
-    *x = *y;
-    *y = temp;
+    *x = *x ^ *y ^ (*y = *x);
 }
 
-void insert(struct heap *h, int x)
+void insert(heap *h, int x)
 {
-    if (h->size >= MAX_SIZE - 1)
+    if (h->size > MAX_SIZE)
     {
         printf("Heap is full\n");
         return;
@@ -25,14 +29,14 @@ void insert(struct heap *h, int x)
     h->a[h->size] = x;
 
     int index = h->size;
-    while (index > 1 && h->a[index] < h->a[index>>1])
+    while (index > 1 && h->a[index] < h->a[index/2])
     {
-        swap(&h->a[index], &h->a[index>>1]);
-        index>>=1; 
+        swap(&h->a[index], &h->a[index/2]);
+        index/=2; 
     }
 }
 
-int pop(struct heap *h)
+int pop(heap *h)
 {
     if (!h->size)
     {
@@ -46,10 +50,10 @@ int pop(struct heap *h)
     h->size--;
 
     int index=1;
-    while(1) 
+    while(1)
     {
-        int left = index<<1;   
-        int right = (index<<1)|1; 
+        int left = index*2;   
+        int right = index*2+1; 
         int smallest = index;
         if (left <= h->size && h->a[left] < h->a[smallest])
             smallest = left;
@@ -74,6 +78,8 @@ int main()
 {
     int n;
     scanf("%d", &n);
+    heap myHeap;
+    int third_el = myHeap.a[3];
 
     int x;
     for (int i = 0; i < n; ++i)
@@ -92,5 +98,6 @@ int main()
         v[i] = pop(&myHeap);
         printf("%d ", v[i]);
     }
+    printf("\n");
 
 }
