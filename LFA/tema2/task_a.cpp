@@ -8,16 +8,16 @@
 #include <set>
 #include <queue>
 using namespace std;
-class NFA // can be DFA too
+class NFA
 {
 private:
-    int n, s;
-    char l;
+    int s;
     unordered_map<int, bool> isEnd;
     unordered_map<int, vector<pair<int, char>>> v;
 
 public:
-    NFA(int N) : n(N){};
+    NFA() : s(0){};
+
     void setStart(int start)
     {
         s = start;
@@ -36,62 +36,49 @@ public:
     void toDFA()
     {
 
-        // Map to store DFA transitions. Each state in the DFA is a set of NFA states,
-        // and it maps an input character to another set of NFA states (DFA state).
-        map<set<int>, unordered_map<char, set<int>>> dfaTransitions;
+        NFA DFA;
 
-        // Queue to manage the set of states currently being processed.
-        queue<set<int>> q;
+        queue<int> q;
 
-        // Set to keep track of seen DFA states to avoid reprocessing the same states.
-        set<set<int>> seenStates;
+
+        set<int> seenStates;
 
         // Initialize the DFA with the start state of the NFA.
-        set<int> startState = {s};
-        q.push(startState);
+        q.push(s);
 
-        seenStates.insert(startState);
+        seenStates.insert(s);
 
         // Process each set of states in the queue until there are no more new states.
         while (!q.empty())
         {
 
-            set<int> currentState = q.front();
+            int currentState = q.front();
             q.pop();
-
-            // Collect all characters leading out of the current state set. This forms
-            // the effective alphabet for the transitions from this state.
             unordered_set<char> alphabet;
-            for (int state : currentState)
+            for (const auto &state : v[currentState])
             {
-                for (auto &trans : v[state])
-                {
-
-                    alphabet.insert(trans.second);
-                }
+                alphabet.insert(state.second);
             }
 
             // For each character in the alphabet, determine the new set of NFA states
             // that can be reached from the current DFA state using this character.
             for (char c : alphabet)
             {
-                set<int> newState;
-                for (int state : currentState)
+                int newState = -1;
+
+                for (auto &trans : v[currentState])
                 {
-                    for (auto &trans : v[state])
+                    if (trans.second == c)
                     {
-                        if (trans.second == c)
-                        {
-                            newState.insert(trans.first);
-                        }
+                        newState = trans.first;
                     }
                 }
 
                 // If the new state set formed is not empty and has not been seen before,
                 // it's added to the queue for processing and to the map of DFA transitions.
-                if (!newState.empty())
+                if (newState != -1)
                 {
-                    dfaTransitions[currentState][c] = newState;
+                    DFA.v[currentState].push_back({newState, c});
                     if (seenStates.find(newState) == seenStates.end())
                     {
                         q.push(newState);
@@ -100,19 +87,11 @@ public:
                 }
             }
         }
-
-        ofstream g("output.txt");
-        for (auto &state : dfaTransitions)
+        for(const auto &node : v) 
         {
-            for (auto &trans : state.second)
-            {
-                for (int s : state.first)
-                    g << s << ",";
-                g << " -" << trans.first << "-> ";
-                for (int s : trans.second)
-                    g << s << ",";
-                g << endl;
-            }
+            for(const auto & adj: node.second) {
+                cout<<node.first<<" "<<adj.second<<" "<<adj.first<<'\n';
+            } 
         }
     }
 };
@@ -123,7 +102,7 @@ int main()
 
     int n;
     f >> n;
-    NFA nfa(n);
+    NFA nfa;
     for (int i{}; i < n; ++i)
     {
         int aux;
