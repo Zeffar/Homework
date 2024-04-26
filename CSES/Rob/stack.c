@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct // Anonymous structure
+typedef struct node // Anonymous structure
 {
     int data;
-    Node *next;
+    struct node *next;
 } Node; // type definition
 
 void insert(Node **head, int x)
 {
-    Node *newNode = (Node *)malloc(sizeof(Node)); //Aloca memorie pt un nod nou
+    Node *newNode = (Node *)malloc(sizeof(Node)); // Aloca memorie pt un nod nou
     newNode->data = x;
     newNode->next = *head;
-    *head = newNode; //mut head la capul stivei
+    *head = newNode; // mut head la capul stivei
 }
 
 void deleteNode(Node **head, int key)
@@ -44,6 +44,17 @@ void deleteNode(Node **head, int key)
     free(temp); // Free memory
 }
 
+void pop(Node **head)
+{
+    Node *temp = *head;
+    if (temp == NULL)
+    {
+        return;
+    }
+    *head = temp->next;
+    free(temp);
+}
+
 void printList(Node *node)
 {
     while (node != NULL)
@@ -51,7 +62,7 @@ void printList(Node *node)
         printf("%d -> ", node->data);
         node = node->next;
     }
-    printf("end\n");
+    printf("NULL\n");
 }
 
 int main()
@@ -61,9 +72,14 @@ int main()
     insert(&head, 10);
     insert(&head, 20);
     insert(&head, 30);
+    insert(&head, 40);
+    insert(&head, 50);
     printList(head);
 
     deleteNode(&head, 20);
+    printList(head);
+
+    pop(&head);
     printList(head);
 
     return 0;

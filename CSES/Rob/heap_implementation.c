@@ -68,10 +68,8 @@ int pop(heap *h)
         }
 
         else
-            break; 
+            break;
     }
-    
-    return root;
 }
 
 int main()
@@ -91,7 +89,7 @@ int main()
     printf("Root of the heap: %d\n", myHeap.a[1]);
     printf("Size of the heap: %d\n", myHeap.size);
 
-    int v[10000]={0};
+    int v[10000];
     printf("The sorted vector is: ");
     for(int i=0; i<n; ++i) 
     {
