@@ -12,7 +12,6 @@ protected:
     string prenume;
     int varsta;
     string adresa;
-    unordered_map<string, int> factori_risc;
     unordered_map<string, int> afectiuni;
     unordered_map<string, string> date_analize;
 
