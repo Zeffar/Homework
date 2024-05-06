@@ -20,6 +20,7 @@ protected:
 
 public:
     virtual ~Pacient() {}
+
     Pacient(int varsta)
     {
         this->varsta = varsta;
@@ -115,10 +116,10 @@ public:
     PacientAdult(int varsta) : Pacient(varsta) {}
 };
 
-class PacientAdultBatran : public Pacient
+class PacientAdultBatran : public PacientAdult
 {
 public:
-    PacientAdultBatran(int varsta) : Pacient(varsta)
+    PacientAdultBatran(int varsta) : PacientAdult(varsta)
     {
         afectiuni["fumator (1 -> nu, 2 -> da)"] = 1;
         afectiuni["sedentar (1 -> scazut, 2 -> mediu, 3 -> ridicat)"] = 2;
@@ -171,7 +172,7 @@ int main()
             system("clear");
             for (const auto &pacient : pacienti)
             {
-                if (pacient->getRisc() == "RIDICAT" && (dynamic_cast<PacientAdult *>(pacient.get()) || dynamic_cast<PacientAdultBatran *>(pacient.get())))
+                if (pacient->getRisc() == "RIDICAT" && dynamic_cast<PacientAdult *>(pacient.get() ))
                 {
                     cout << *pacient << endl;
                 }
