@@ -16,14 +16,13 @@ int BFS(int x, int y)
         {
             int vecin = adj[node][i];
             // is vecin visited
-
-            if (dist[node]==0)
+            if (dist[vecin] == 0)
             {
                 // vizitam vecinul
                 dist[vecin] = dist[node] + 1;
                 if (vecin == y)
                 {
-                    return dist[vecin]; // distanta pana la y
+                    return dist[vecin]-1; // distanta pana la y
                 }
                 else
                 {
@@ -32,8 +31,21 @@ int BFS(int x, int y)
             }
         }
     }
+    return -1;
 }
-void printGraph();
+void printGraph(int n)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        printf("%d -> ", i);
+        int nrVecini = adj[i].size();
+        for (int j = 0; j < nrVecini; j++)
+        {
+            printf("%d, ", adj[i][j]);
+        }
+        printf("\n");
+    }
+}
 int main()
 {
     int n, m;
@@ -44,6 +56,11 @@ int main()
         scanf("%d%d", &a, &b);
         adj[a].push_back(b);
     }
+    printGraph(n);
+
+    int v[10];
+   
+
     int x, y;
     scanf("%d%d", &x, &y);
     printf("%d ", BFS(x, y));
