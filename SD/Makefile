@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall -O2 -std=c++23
-FILE = kami.cpp
+FILE = plantatie.cpp
 
 all: build
 
