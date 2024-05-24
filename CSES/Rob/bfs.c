@@ -138,17 +138,22 @@ int BFS(int x, int y)
         {
             int vecin = stackHead->data;
             stackHead = stackHead->next;
-
+            //if not visited
             if (dist[vecin] == 0)
             {
+                //visit
                 dist[vecin] = dist[nodeIdx] + 1;
+
+                //if destination found
                 if (vecin == y)
                 {
+                    //return distance to dest
                     return dist[vecin] - 1;
                 }
                 
                 else
                 {
+                    //keep searcing
                     push(&qe, vecin);
                 }
             }
