@@ -30,3 +30,4 @@ int main()
     cout << '\n';
     return 0;
 }
+//GNU - GNU's Not Unix
