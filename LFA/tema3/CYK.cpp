@@ -6,9 +6,7 @@
 #include <string>
 using namespace std;
 
-unordered_map<string, vector<vector<string>>> rule;
-
-void cyk(vector<string> w)
+void cyk(const vector<string> w, const unordered_map<string, vector<vector<string>>> &rule)
 {
     int n = (int)w.size();
     map<int, map<int, set<string>>> T;
@@ -48,6 +46,7 @@ void cyk(vector<string> w)
 
 int main()
 {
+    unordered_map<string, vector<vector<string>>> rule;
     rule["A"] = {{"D", "B"}};
     rule["B"] = {{"C", "B"}, {"s"}, {"ss"}, {"sss"}};
     rule["C"] = {{"E", "F"}, {"a"}, {"aa"}, {"aaa"}};
@@ -58,10 +57,10 @@ int main()
     vector<string> w;
 
     w = {"i", "cc", "b", "s"};
-    cyk(w);
+    cyk(w, rule);
 
     w = {"i", "cc", "sss", "bb"};
-    cyk(w);
+    cyk(w, rule);
 
     return 0;
 }
