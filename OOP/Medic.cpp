@@ -13,8 +13,6 @@ protected:
     int varsta;
     string adresa;
     unordered_map<string, int> afectiuni;
-    unordered_map<string, string> date_analize;
-
     string risc = "NU";
 
 public:
@@ -64,7 +62,7 @@ public:
             if (factorValue > factor.second)
                 if (pacient.risc == "DA")
                     pacient.risc = "RIDICAT";
-                else
+                else if (pacient.risc == "NU")
                     pacient.risc = "DA";
         }
         return is;
@@ -83,8 +81,10 @@ private:
             {
                 if (parinte[0] == nullptr)
                     parinte[0] = move(pacient);
+
                 else if (parinte[1] == nullptr)
                     parinte[1] = move(pacient);
+
             }
         }
     }
@@ -98,14 +98,9 @@ public:
         {
             if (risc == "DA")
                 risc = "RIDICAT";
-            else
+            else if (risc == "NU")
                 risc = "DA";
         }
-    }
-
-    string getRisc()
-    {
-        return risc;
     }
 };
 
@@ -171,7 +166,7 @@ int main()
             system("clear");
             for (const auto &pacient : pacienti)
             {
-                if (pacient->getRisc() == "RIDICAT" && dynamic_cast<PacientAdult *>(pacient.get() ))
+                if (pacient->getRisc() == "RIDICAT" && dynamic_cast<PacientAdult *>(pacient.get()))
                 {
                     cout << *pacient << endl;
                 }
@@ -182,7 +177,7 @@ int main()
             system("clear");
             for (const auto &pacient : pacienti)
             {
-                if (pacient->getRisc() == "RIDICAT" && dynamic_cast<PacientCopil *>(pacient.get()))
+                if (pacient->getRisc() == "DA" && dynamic_cast<PacientCopil *>(pacient.get()))
                 {
                     cout << *pacient << endl;
                 }
