@@ -15,6 +15,7 @@ int main()
     ++k;
     for (long long i{}; i < k; ++i)
     {
+        // first k souls inserted
         f >> x;
         pq.push(x);
     }
@@ -22,6 +23,8 @@ int main()
     long long ichigo{}, spirit, delta{};
     for (long long i = k; i < n; ++i)
     {
+        // fight only the weakest soul in the heap
+        // always k souls left in the heap
         spirit = pq.top();
         pq.pop();
         f >> x;
@@ -37,6 +40,7 @@ int main()
     f.close();
     while (!pq.empty())
     {
+        // fight the remaining k souls
         spirit = pq.top();
         pq.pop();
         if (ichigo < spirit)

@@ -31,10 +31,13 @@ int main()
         else
         {
             f >> idx;
+            // bruteforce
             int sum = rank[idx--];
             while (idx > 0 && sum > rank[idx])
             {
                 sum += rank[idx--];
+                // if over upper bound of rank elements
+                // terminate early
                 if (sum > maxVal)
                     idx = 0;
             }

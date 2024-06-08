@@ -37,15 +37,21 @@ int main()
     }
 
     sort(v.begin(), v.end(), drCmp);
+    // larger ranges first
+    // decreasing with respect to dr
     int i{}, cost{};
     while (n > 0)
     {
         while (v[i].dr >= n && i < m)
             pq.push(v[i++]);
+        // umple heap ul pana la umplerea albumului
+
         range cheapest = pq.top();
         cost += cheapest.cost;
         n -= k;
+        // alege cel mai ieftin range sa acopere k pagini
         pq.pop();
+        // scoate range ul din heap
     }
 
     g << cost;

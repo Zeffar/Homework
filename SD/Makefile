@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall -O2 -std=c++23
-FILE = plantatie.cpp
+FILE = euclid.cpp
 
 all: build
 

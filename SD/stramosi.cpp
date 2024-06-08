@@ -4,6 +4,9 @@
 using namespace std;
 int n, m;
 int stramosi[33][250005];
+// stramosi[k][i] -> 2^kth ancestor of i
+
+// binary lifting
 
 int main()
 {
@@ -19,6 +22,9 @@ int main()
     for (int i = 1; i < 33; ++i)
         for (int j = 1; j < n; ++j)
             stramosi[i][j] = stramosi[i - 1][stramosi[i - 1][j]];
+            // pt al 2^k lea stramos al lui j,
+            // gaseste al 2^(k-1) lea stramos al lui j
+            // si apoi al 2^(k-1) lea stramos al stramosului
 
     for (int i = 0; i < m; ++i)
     {
